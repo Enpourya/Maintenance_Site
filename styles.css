@@ -1,0 +1,411 @@
+/* ==================== ریست و تنظیمات پایه ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* امنیت: جلوگیری از انتخاب متن */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ==================== پس‌زمینه متحرک ==================== */
+body {
+    font-family: 'Segoe UI', 'Vazirmatn', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #800080, #4B0082, #6A5ACD, #D8BFD8, #C0C0C0);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* انیمیشن اصلی پس‌زمینه */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 0%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 100%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* المان‌های شناور تزئینی */
+body::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(128, 0, 128, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(75, 0, 130, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(106, 90, 205, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 60% 60%, rgba(192, 192, 192, 0.15) 0%, transparent 50%);
+    animation: glowPulse 8s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+@keyframes glowPulse {
+    0% { 
+        opacity: 0.6; 
+        transform: scale(1) rotate(0deg); 
+    }
+    50% { 
+        opacity: 0.8; 
+        transform: scale(1.03) rotate(1deg); 
+    }
+    100% { 
+        opacity: 0.7; 
+        transform: scale(1.01) rotate(-1deg); 
+    }
+}
+
+/* ذرات شناور تزئینی */
+body::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(216, 191, 216, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatParticle 20s linear infinite;
+    z-index: 0;
+}
+
+@keyframes floatParticle {
+    0% {
+        top: 10%;
+        left: 10%;
+    }
+    25% {
+        top: 70%;
+        left: 80%;
+    }
+    50% {
+        top: 80%;
+        left: 20%;
+    }
+    75% {
+        top: 20%;
+        left: 70%;
+    }
+    100% {
+        top: 10%;
+        left: 10%;
+    }
+}
+
+/* ==================== کانتینر اصلی ==================== */
+.maintenance-container {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 3.5rem 3rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 30px;
+    border: 1px solid rgba(192, 192, 192, 0.25);
+    box-shadow: 
+        0 8px 32px rgba(128, 0, 128, 0.25),
+        0 2px 8px rgba(75, 0, 130, 0.2),
+        inset 0 0 30px rgba(192, 192, 192, 0.1);
+    animation: containerFloat 6s ease-in-out infinite;
+    max-width: 90%;
+    width: 550px;
+}
+
+@keyframes containerFloat {
+    0%, 100% { 
+        transform: translateY(0px);
+        box-shadow: 0 8px 32px rgba(128, 0, 128, 0.25);
+    }
+    50% { 
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(128, 0, 128, 0.35);
+    }
+}
+
+/* ==================== لوگو ==================== */
+.logo-container {
+    margin-bottom: 2rem;
+    animation: logoEntry 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    opacity: 0;
+    transform: scale(0);
+    animation-delay: 0.3s;
+}
+
+@keyframes logoEntry {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-180deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(128, 0, 128, 0.5));
+    transition: all 0.5s ease;
+    animation: logoGlow 3s ease-in-out infinite alternate;
+    cursor: pointer;
+}
+
+@keyframes logoGlow {
+    0% {
+        filter: drop-shadow(0 0 15px rgba(128, 0, 128, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 25px rgba(216, 191, 216, 0.6));
+    }
+    100% {
+        filter: drop-shadow(0 0 20px rgba(75, 0, 130, 0.5));
+    }
+}
+
+.logo:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 35px rgba(128, 0, 128, 0.7));
+}
+
+/* مدیریت خطای بارگذاری لوگو */
+.logo-error {
+    width: 100px;
+    height: 100px;
+    background: rgba(128, 0, 128, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+}
+
+/* ==================== عناوین ==================== */
+.title-container {
+    margin-bottom: 2.5rem;
+    animation: titleFadeIn 1s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.6s;
+}
+
+@keyframes titleFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.site-name {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #F8F8FF;
+    text-shadow: 
+        0 0 20px rgba(128, 0, 128, 0.6),
+        0 0 40px rgba(75, 0, 130, 0.4),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.8rem;
+    letter-spacing: 3px;
+    animation: siteNameGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes siteNameGlow {
+    0% { 
+        text-shadow: 0 0 20px rgba(128, 0, 128, 0.4),
+                     0 0 40px rgba(75, 0, 130, 0.3);
+    }
+    100% { 
+        text-shadow: 0 0 35px rgba(216, 191, 216, 0.7),
+                     0 0 60px rgba(128, 0, 128, 0.5),
+                     0 0 80px rgba(75, 0, 130, 0.4);
+    }
+}
+
+.maintenance-text {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #E6E6FA;
+    text-shadow: 
+        0 0 15px rgba(128, 0, 128, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+    animation: maintenancePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes maintenancePulse {
+    0%, 100% { 
+        opacity: 0.85;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.02);
+    }
+}
+
+/* ==================== لینک‌های اجتماعی ==================== */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    animation: socialFadeIn 1s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.9s;
+}
+
+@keyframes socialFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.social-item {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #F8F8FF;
+    position: relative;
+}
+
+.social-item:hover {
+    transform: translateY(-10px) scale(1.08);
+}
+
+.social-item:active {
+    transform: translateY(-5px) scale(1.05);
+}
+
+/* آیکون‌ها */
+.social-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(192, 192, 192, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    object-fit: cover;
+    transition: all 0.4s ease;
+    box-shadow: 
+        0 5px 15px rgba(128, 0, 128, 0.3),
+        inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.social-item:hover .social-icon {
+    border-color: #D8BFD8;
+    box-shadow: 
+        0 0 30px rgba(128, 0, 128, 0.6),
+        0 0 50px rgba(75, 0, 130, 0.3);
+    transform: rotate(8deg);
+}
+
+/* نام شبکه اجتماعی */
+.social-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.social-item:hover .social-name {
+    color: #D8BFD8;
+    text-shadow: 0 0 10px rgba(128, 0, 128, 0.6);
+}
+
+/* ==================== رسپانسیو ==================== */
+@media (max-width: 768px) {
+    .maintenance-container {
+        padding: 2.5rem 1.5rem;
+        margin: 1rem;
+        border-radius: 25px;
+    }
+    
+    .logo {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .site-name {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+    
+    .maintenance-text {
+        font-size: 1.2rem;
+    }
+    
+    .social-links {
+        gap: 1.5rem;
+    }
+    
+    .social-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .social-name {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .maintenance-container {
+        padding: 2rem 1rem;
+    }
+    
+    .logo {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .site-name {
+        font-size: 1.6rem;
+    }
+    
+    .maintenance-text {
+        font-size: 1rem;
+    }
+    
+    .social-links {
+        gap: 1rem;
+    }
+    
+    .social-icon {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* ==================== حالت بدون امنیت ==================== */
+body.security-disabled {
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+}
