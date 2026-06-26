@@ -1,0 +1,27 @@
+{
+    "site_name": "گالری اوپال",
+    "maintenance_text": "سایت در حال بروزرسانی می‌باشد",
+    "logo_path": "icon\/logo.png",
+    "social_links": [
+        {
+            "name": "روبیکا",
+            "icon": "icon\/icon1.jpg",
+            "url": "https:\/\/rubika.ir\/gallery_opal",
+            "alt": "Rubika"
+        },
+        {
+            "name": "ایتا",
+            "icon": "icon\/icon2.jpg",
+            "url": "https:\/\/eitaa.com\/opalgallary",
+            "alt": "Eitaa"
+        },
+        {
+            "name": "بله",
+            "icon": "icon\/icon3.jpg",
+            "url": "https:\/\/ble.ir\/opal_shopping",
+            "alt": "Bale"
+        }
+    ],
+    "animation_speed": 15,
+    "show_security": true
+}
