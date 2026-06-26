@@ -1,0 +1,6 @@
+Add logo and icon
+logo.png
+icon1.jpg
+icon2.jpg
+icon3.jpg
+...
